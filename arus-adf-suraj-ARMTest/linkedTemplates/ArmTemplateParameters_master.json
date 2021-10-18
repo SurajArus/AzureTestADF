@@ -1,0 +1,30 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"factoryName": {
+			"value": "arus-adf-suraj-ARMTest"
+		},
+		"AzureSqlDB_connectionString": {
+			"value": ""
+		},
+		"arus_datalake_demo_accountKey": {
+			"value": ""
+		},
+		"error_linkedService_accountKey": {
+			"value": ""
+		},
+		"arus_datalake_demo_properties_typeProperties_url": {
+			"value": "https://aruslearnlake.dfs.core.windows.net"
+		},
+		"error_linkedService_properties_typeProperties_url": {
+			"value": "https://aruslearnlake.dfs.core.windows.net"
+		},
+		"containerUri": {
+			"value": ""
+		},
+		"containerSasToken": {
+			"value": ""
+		}
+	}
+}
