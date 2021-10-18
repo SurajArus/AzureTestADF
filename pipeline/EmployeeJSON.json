@@ -1,0 +1,186 @@
+{
+	"name": "EmployeeJSON",
+	"properties": {
+		"activities": [
+			{
+				"name": "Copy EmployeeJSON",
+				"type": "Copy",
+				"dependsOn": [],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"source": {
+						"type": "JsonSource",
+						"storeSettings": {
+							"type": "AzureBlobFSReadSettings",
+							"recursive": true,
+							"enablePartitionDiscovery": false
+						},
+						"formatSettings": {
+							"type": "JsonReadSettings"
+						}
+					},
+					"sink": {
+						"type": "AzureSqlSink",
+						"preCopyScript": "TRUNCATE TABLE [suraj].[EmployeeStagingJSON]",
+						"disableMetricsCollection": false
+					},
+					"enableStaging": false,
+					"translator": {
+						"type": "TabularTranslator",
+						"mappings": [
+							{
+								"source": {
+									"path": "$['EmployeeID']"
+								},
+								"sink": {
+									"name": "EmployeeID",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Name']"
+								},
+								"sink": {
+									"name": "Name",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Age']"
+								},
+								"sink": {
+									"name": "Age",
+									"type": "Byte"
+								}
+							},
+							{
+								"source": {
+									"path": "$['PhoneNumbers']"
+								},
+								"sink": {
+									"name": "PhoneNumber",
+									"type": "String"
+								}
+							},
+							{
+								"source": {
+									"path": "$['Techonlogies']"
+								},
+								"sink": {
+									"name": "Technology",
+									"type": "String"
+								}
+							}
+						],
+						"mapComplexValuesToString": true
+					}
+				},
+				"inputs": [
+					{
+						"referenceName": "src_EmployeeJSON_DataLake",
+						"type": "DatasetReference"
+					}
+				],
+				"outputs": [
+					{
+						"referenceName": "dest_EmployeeStagingJSON_SQLServer",
+						"type": "DatasetReference"
+					}
+				]
+			},
+			{
+				"name": "suraj_usp_EmployeeJSON",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "Copy EmployeeJSON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[suraj].[usp_EmployeeJSON]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "suraj_usp_EmployeePhoneNumberJSON",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "suraj_usp_EmployeeJSON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[suraj].[usp_EmployeePhoneNumberJSON]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDB",
+					"type": "LinkedServiceReference"
+				}
+			},
+			{
+				"name": "suraj_usp_EmployeeTechJSON",
+				"type": "SqlServerStoredProcedure",
+				"dependsOn": [
+					{
+						"activity": "suraj_usp_EmployeePhoneNumberJSON",
+						"dependencyConditions": [
+							"Succeeded"
+						]
+					}
+				],
+				"policy": {
+					"timeout": "7.00:00:00",
+					"retry": 0,
+					"retryIntervalInSeconds": 30,
+					"secureOutput": false,
+					"secureInput": false
+				},
+				"userProperties": [],
+				"typeProperties": {
+					"storedProcedureName": "[suraj].[usp_EmployeeTechJSON]"
+				},
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDB",
+					"type": "LinkedServiceReference"
+				}
+			}
+		],
+		"annotations": [],
+		"lastPublishTime": "2021-10-15T10:37:02Z"
+	},
+	"type": "Microsoft.DataFactory/factories/pipelines"
+}

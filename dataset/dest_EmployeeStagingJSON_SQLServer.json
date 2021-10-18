@@ -1,0 +1,40 @@
+{
+	"name": "dest_EmployeeStagingJSON_SQLServer",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDB",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [
+			{
+				"name": "EmployeeID",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "Name",
+				"type": "varchar"
+			},
+			{
+				"name": "Age",
+				"type": "tinyint",
+				"precision": 3
+			},
+			{
+				"name": "PhoneNumber",
+				"type": "varchar"
+			},
+			{
+				"name": "Technology",
+				"type": "varchar"
+			}
+		],
+		"typeProperties": {
+			"schema": "suraj",
+			"table": "EmployeeStagingJSON"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

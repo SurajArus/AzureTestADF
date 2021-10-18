@@ -1,0 +1,51 @@
+{
+	"name": "src_EmployeeJSON_DataLake",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "arus_datalake_demo",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "Json",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobFSLocation",
+				"fileName": "Employee.txt",
+				"folderPath": "Employee",
+				"fileSystem": "suraj"
+			}
+		},
+		"schema": {
+			"type": "object",
+			"properties": {
+				"EmployeeID": {
+					"type": "integer"
+				},
+				"Name": {
+					"type": "string"
+				},
+				"Age": {
+					"type": "integer"
+				},
+				"PhoneNumbers": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				},
+				"Techonlogies": {
+					"type": "array",
+					"items": {
+						"type": "object",
+						"properties": {
+							"Name": {
+								"type": "string"
+							}
+						}
+					}
+				}
+			}
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

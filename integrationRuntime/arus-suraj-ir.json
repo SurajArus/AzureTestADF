@@ -1,0 +1,7 @@
+{
+	"name": "arus-suraj-ir",
+	"properties": {
+		"type": "SelfHosted",
+		"description": "This is a demo IR connected to Suraj's machine"
+	}
+}

@@ -1,0 +1,9 @@
+{
+	"name": "arus-adf-suraj-ARMTest",
+	"location": "eastus",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "934e907c-8f80-4734-888b-7bb575484c7b",
+		"tenantId": "70276ef2-60a3-4ac0-8e95-da97e1219c9b"
+	}
+}
